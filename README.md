@@ -59,5 +59,5 @@ vercel secret add NEXT_PUBLIC_URLAPI https://snake-api-cvo1.vercel.app
 
 Notas:
 - Não inclua arquivos `.env` no repositório — a Vercel lê as variáveis do painel de Environment Variables.
-- O arquivo `vercel.json` presente neste repositório referencia a variável de ambiente `NEXT_PUBLIC_URLAPI` como um secret; você deve criar esse secret ou definir a env na interface da Vercel.
+- Este repositório inclui um `vercel.json` para guiar a build do Next.js, mas a configuração de variáveis de ambiente/secret deve ser feita no painel da Vercel ou via CLI conforme preferir.
 
