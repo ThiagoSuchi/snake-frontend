@@ -34,7 +34,7 @@ export default function LoginPage() {
                 try {
                     const parsed = text ? JSON.parse(text) : null;
                     if (parsed && parsed.error) serverMsg = parsed.error;
-                } catch (e) {
+                } catch {
                     // não JSON, manter statusText
                 }
                 setErrorMessage(`Erro ${res.status}: ${serverMsg}`);
@@ -42,7 +42,7 @@ export default function LoginPage() {
             }
 
             const players = await res.json();
-            const jogador = players.find((p: any) => p.name?.toLowerCase().trim() === name.toLowerCase().trim());
+            const jogador = players.find((p: { name?: string; password?: string; _id?: string }) => p.name?.toLowerCase().trim() === name.toLowerCase().trim());
 
             if (!jogador) {
                 setErrorMessage("Usuário não foi encontrado. Por favor, cadastre-se primeiro.");
@@ -60,10 +60,10 @@ export default function LoginPage() {
                 localStorage.setItem("jogadorId", jogador._id);
             }
             router.push("/jogo");
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error(err);
             // Mostra mensagem detalhada do erro de rede
-            setErrorMessage(err?.message || "Erro ao conectar com o servidor");
+            setErrorMessage((err as Error)?.message || "Erro ao conectar com o servidor");
         }
     };
 

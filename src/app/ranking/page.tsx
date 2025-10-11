@@ -24,7 +24,7 @@ export default function Ranking() {
       let response;
       try {
         response = await axios.get(`${process.env.NEXT_PUBLIC_URLAPI!}/ranking`);
-      } catch (rankingError) {
+      } catch {
         // Se não existir endpoint de ranking, busca todos os jogadores
         response = await axios.get(`${process.env.NEXT_PUBLIC_URLAPI!}/jogadores`);
       }
@@ -32,10 +32,10 @@ export default function Ranking() {
       if (response.data && Array.isArray(response.data)) {
         // Filtra apenas jogadores com pontos e ordena por pontuação
         const playersWithScores = response.data
-          .filter((player: any) => player.score >= 0 || player.pontos >= 0)
-          .map((player: any) => ({
-            _id: player._id || player.id,
-            nome: player.name || player.nome,
+          .filter((player: { score?: number; pontos?: number }) => (player.score ?? 0) >= 0 || (player.pontos ?? 0) >= 0)
+          .map((player: { _id?: string; id?: string; name?: string; nome?: string; score?: number; pontos?: number }): Score => ({
+            _id: player._id || player.id || '',
+            nome: player.name || player.nome || '',
             pontos: player.score || player.pontos || 0
           }))
           .sort((a: Score, b: Score) => b.pontos - a.pontos);

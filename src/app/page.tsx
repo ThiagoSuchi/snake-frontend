@@ -26,7 +26,7 @@ export default function Menu() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selected, options, router]);
+  }, [selected]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="h-screen w-screen flex flex-col items-center justify-center bg-[url('/bg-clouds.png')] bg-cover">

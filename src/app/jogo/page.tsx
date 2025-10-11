@@ -93,7 +93,7 @@ export default function Page(): JSX.Element {
       return;
     }
 
-    let newSnake = [head, ...snake];
+    const newSnake = [head, ...snake];
 
     // comeu maçã
     if (head.x === apple.x && head.y === apple.y) {
