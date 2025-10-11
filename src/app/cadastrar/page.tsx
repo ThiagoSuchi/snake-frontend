@@ -31,7 +31,7 @@ export default function CadastrarPage() {
 
             setErrorMessage("");
             try {
-                const res = await fetch(process.env.NEXT_PUBLIC_URLAPI!, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_URLAPI}/jogadores`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ name, password }),

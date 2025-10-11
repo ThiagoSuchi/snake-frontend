@@ -26,7 +26,7 @@ export default function LoginPage() {
         setErrorMessage("");
         try {
             // Buscar jogador existente e não criar automaticamente
-            const res = await fetch(process.env.NEXT_PUBLIC_URLAPI!);
+            const res = await fetch(`${process.env.NEXT_PUBLIC_URLAPI}/jogadores`);
             if (!res.ok) {
                 // tenta ler mensagem do backend (json) e mostra status
                 const text = await res.text().catch(() => null);
